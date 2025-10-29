@@ -8,6 +8,7 @@ import History from './pages/History'
 import Pnf from './pages/Pnf'
 import Headear from './combonants/Headear'
 import Footer from './combonants/Footer'
+
 function App() {
   
 
