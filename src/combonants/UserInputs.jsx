@@ -35,6 +35,10 @@ const[resumeDetails,setResumeDetails] = React.useState({
   userSkills:[],
   summary:""
 })
+
+// reference to skill input tag
+const skillRef = React.useRef()
+
 console.log(resumeDetails);
 
 
@@ -79,6 +83,19 @@ console.log(resumeDetails);
   const handleReset = () => {
     setActiveStep(0);
   };
+
+  const addSkill  = (skill) =>{
+    if(resumeDetails.userSkills.includes(skill)){
+alert("the given Skill already added , please add another!!!")
+    }else{
+setResumeDetails({...resumeDetails,userSkills:[...resumeDetails.userSkills,skill]})
+// to clear add skill text box
+skillRef.current.value = ""
+    }
+  }
+  const removeSkill =(skill)=>{
+    setResumeDetails({...resumeDetails,userSkills:resumeDetails.userSkills.filter(item=>item!=skill)})
+  }
   const renderSteps = (stepCount)=>{
     switch(stepCount){
         case 0 : return (
@@ -137,21 +154,29 @@ console.log(resumeDetails);
        <div>
         <h3>Skills</h3>
         <div className="d-flex align-items-center justify-content-between p-3 w-100">
-    <input placeholder='Add Skills' type="text" className="form-control" />
-           <Button variant='text'>Add</Button>
+    <input ref={skillRef} placeholder='Add Skills' type="text" className="form-control" />
+           <Button onClick={()=>addSkill(skillRef.current.value)} variant='text'>Add</Button>
 
         </div>
         <h5>Suggections</h5>
        <div className='d-flex flex-wrap justify-content-between my-3'> 
      {
       skillSuggestionArray.map((item,index)=>(
-           <Button key={index} variant='outlined' className='m-2'>{item}</Button>
+           <Button onClick={()=>addSkill(item)} key={index} variant='outlined' className='m-2'>{item}</Button>
       ))
      }
         </div>
         <h5>Added Skills:</h5>
          <div className='d-flex flex-wrap justify-content-between my-3'>
-          <Button className='m-1' variant="contained">Contained <FaXmark className='ms-2 cursor-pointer' /></Button> 
+          {
+            resumeDetails.userSkills?.length>0?
+            resumeDetails.userSkills?.map((skill,index)=>(
+                        <Button key={index} className='m-1' variant="contained">{skill}<FaXmark onClick={()=>removeSkill(skill)} className='ms-2 cursor-pointer' /></Button> 
+
+            ))
+            :
+            <p className='fw-bolder'>No skill added</p>
+          }
           </div>
        </div>
         )
