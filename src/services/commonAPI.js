@@ -7,7 +7,8 @@ const commonAPI = async (url,httpMethord,reqBody) => {
      data:reqBody
    }
    // api call
-   await axios(requestConfig).then(res=>res).catch(err=>err)
+   
+  return await axios(requestConfig).then(res=>res).catch(err=>err)
 }
 
 export default commonAPI

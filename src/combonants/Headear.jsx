@@ -27,7 +27,7 @@ function Headear() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Link className='text-light text-decoration-none' to={'/'}>rBuilder</Link>
           </Typography>
-          <Tooltip title={projectInfo}><Button color="inherit">Login</Button></Tooltip>
+          <Tooltip title={projectInfo}><Button color="inherit">About Us</Button></Tooltip>
         </Toolbar>
       </AppBar>
     </Box>
